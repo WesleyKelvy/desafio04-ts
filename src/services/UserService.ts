@@ -15,7 +15,7 @@ export class UserService {
 
     constructor(
         database = db
-    ){
+    ) {
         this.db = database
     }
 
@@ -32,5 +32,24 @@ export class UserService {
     getAllUsers = () => {
         return this.db
     }
+
+    deleteUser = (email: string): boolean => {
+        const users = this.getAllUsers();
+        let userIndex = users.findIndex(dbUser => dbUser.email === email);
+
+        console.log(userIndex);
+
+        if (userIndex !== -1) {
+            users.splice(userIndex, 1);
+            console.log('Usuário deletado', this.db);
+
+            return true;
+            
+        } else {
+            console.log('Index do User não encontrado');
+            return false;
+        }
+    }
+
 }
 
